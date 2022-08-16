@@ -4,6 +4,7 @@ using BullyBookWeb.Models;
 
 namespace BullyBookWeb.Controllers;
 
+[Area("Costumer")]
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;

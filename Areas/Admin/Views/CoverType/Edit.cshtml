@@ -1,0 +1,30 @@
+@model CoverType
+
+<div style="height:90vh">
+    <form method="post" asp-action="Edit">
+        <div class="border p-3 mt-4">
+            <div class="row pb-2">
+                <h2 class="text-primary">Edit CoverType</h2>
+                <br/>
+            </div>
+            <div asp-validation-summary="All" class="text-danger" style="font-size: 17px"></div>
+            <div class="mb3">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control"></input>
+                @* <span asp-validation-for="Name" class="text-danger text-uppercase"></span> *@
+            </div>
+            <br/>
+            <br/>
+            <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+            <a asp-controller="CoverType" asp-action="Index" class="btn btn-secondary mx-4" style="width:150px">
+                Back to List
+            </a>
+        </div>
+    </form>     
+</div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

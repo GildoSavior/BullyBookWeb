@@ -1,27 +1,23 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BullyBookWeb.Data;
+using BullyBookWeb.Data.Repository.IRepository;
 using BullyBookWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BullyBookWeb.Controllers
 {
-    public class CategoryController : Controller
+    [Area("Admin")]
+    public class CoverTypeController : Controller
     {
-        private readonly ApplicationDbContext _db;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CategoryController(ApplicationDbContext db)
+        public CoverTypeController(IUnitOfWork unitOfWork)
         {
-            _db = db;
+            _unitOfWork = unitOfWork;
 
         }
         public IActionResult Index()
         {
-            IEnumerable<Category> categoryList = _db.Categories.ToList();
-            return View(categoryList);
+            IEnumerable<CoverType> coverList = _unitOfWork.Cover.GetAll();
+            return View(coverList);
         }
 
         [HttpGet]
@@ -32,22 +28,17 @@ namespace BullyBookWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Category obj)
+        public IActionResult Create(CoverType obj)
         {
-            if (obj.Name == obj.DisplayOrder.ToString())
-            {
-                ModelState.AddModelError("CustomError", "The display cannot exctly match the Name.");
-            }
             if (ModelState.IsValid)
             {
-                _db.Categories.Add(obj);
-                _db.SaveChanges();
+                _unitOfWork.Cover.Add(obj);
+                _unitOfWork.Save();
                 TempData["success"] = "Successfully";
                 return RedirectToAction("Index");
             }
             return View(obj);
         }
-
 
         [HttpGet]
         public IActionResult Edit(int? id)
@@ -57,35 +48,30 @@ namespace BullyBookWeb.Controllers
                 return NotFound();
             }
 
-            var categoryFromDb = _db.Categories.Find(id);
+            var cover= _unitOfWork.Cover.GetFirstOrDefault(u => u.Id == id);
 
-            if (categoryFromDb == null)
+            if (cover== null)
             {
                 return NotFound();
             }
 
-            return View(categoryFromDb);
+            return View(cover);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Category obj)
+        public IActionResult Edit(CoverType obj)
         {
-            if (obj.Name == obj.DisplayOrder.ToString())
-            {
-                ModelState.AddModelError("CustomError", "The display cannot exctly match the Name.");
-            }
+        
             if (ModelState.IsValid)
             {
-                _db.Categories.Update(obj);
-                _db.SaveChanges();
+                _unitOfWork.Cover.Update(obj);
+                _unitOfWork.Save();
                 TempData["success"] = "Successfully";
                 return RedirectToAction("Index");
             }
             return View(obj);
         }
-
-
 
         [HttpGet]
         public IActionResult Delete(int? id)
@@ -94,26 +80,26 @@ namespace BullyBookWeb.Controllers
             {
                 return NotFound();
             }
-            var categoryFromDb = _db.Categories.Find(id);
-            if (categoryFromDb == null)
+            var cover = _unitOfWork.Cover.GetFirstOrDefault(u => u.Id == id);
+            if (cover == null)
             {
                 return NotFound();
             }
 
-            return View(categoryFromDb);
+            return View(cover);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeletePost(int? id)
         {
-            var obj = _db.Categories.Find(id);
-            if (obj == null)
+            var cover = _unitOfWork.Cover.GetFirstOrDefault(u => u.Id == id);
+            if (cover == null)
             {
                 return NotFound();
             }
-            _db.Categories.Remove(obj);
-            _db.SaveChanges();
+            _unitOfWork.Cover.Remove(cover);
+            _unitOfWork.Save();
             TempData["success"] = "Successfully";
             return RedirectToAction("Index");
         }

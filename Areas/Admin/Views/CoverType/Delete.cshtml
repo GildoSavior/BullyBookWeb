@@ -1,0 +1,30 @@
+@model CoverType
+
+<div style="height:90vh">
+    <form method="post" asp-action="Delete">
+        <input asp-for="Id" hidden />
+        <div class="border p-3 mt-4">
+            <div class="row pb-2">
+                <h2 class="text-primary">Delete CoverType</h2>
+                <br/>
+            </div>
+            <div asp-validation-summary="All" class="text-danger" style="font-size: 17px"></div>
+            <div class="mb3">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" disabled class="form-control"></input>
+            </div>
+            <br/>
+            <br/>
+            <button type="submit" class="btn btn-primary" style="width:150px">Delete</button>
+            <a asp-controller="CoverType" asp-action="Index" class="btn btn-secondary mx-4" style="width:150px">
+                Back to List
+            </a>
+        </div>
+    </form>     
+</div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

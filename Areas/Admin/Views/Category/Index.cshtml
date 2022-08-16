@@ -19,15 +19,15 @@
             <tr>
                 <th>Category Name</th>
                 <th>Display Order</th>
-                <th>erer</th>
+                <th>Edit/Delete</th>
             </tr>
         </thead>
         <tbody>
             @foreach(var obj in Model) {
                 <tr>
-                      <td width="width:50%">@obj.Name</td>
-                      <td width="width:30%">@obj.DisplayOrder</td>  
-                      <td class="w-75 btn-group" role="group">
+                      <td style="width:50%">@obj.Name</td>
+                      <td style="width:30%">@obj.DisplayOrder</td>  
+                      <td  class="w-75 btn-group-lg" role="group">
                         <a 
                             asp-controller="Category" 
                             asp-action="Edit" 
