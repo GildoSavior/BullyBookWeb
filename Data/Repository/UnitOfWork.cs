@@ -6,6 +6,7 @@ namespace BullyBookWeb.Data.Repository
     {
         public ICategoryRepository Category { get; private set; }
         public ICoverTpeRepository Cover { get; private set; }
+        public IProductRepository Product { get; private set; }
 
         private readonly ApplicationDbContext _db;
 
@@ -14,6 +15,7 @@ namespace BullyBookWeb.Data.Repository
             _db = db;
             Category = new CategoryRepository(_db);
             Cover = new CoverTpeRepository(_db);
+            Product = new ProductRepository(_db);
         }
 
         public void Save()

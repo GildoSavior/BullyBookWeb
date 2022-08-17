@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FdcWqlBfKHZodx1YIRhOVzAiBawQEV2mJl6VIy2t+skg8vKZqbwT93Y1koT6Kf03sNZzTGNBeiltA5jatr4a8Q==",
+  "dgSpecHash": "Iuvzp6hqb0Soryki22bhyS550PRA+tMEow5HaaKtoC6UkPJBwUPiUshmlEd2vueD1niUwpEF4lAYVBHbtPIUmQ==",
   "success": true,
-  "projectFilePath": "/home/savior21/Documentos/DEV/MVC/AspNet_MVC_6/BullyBookWeb/BullyBookWeb.csproj",
+  "projectFilePath": "/home/savior21/Documentos/Developer/DEVDOTNET/MVC/AspNet_MVC_6/BullyBookWeb/BullyBookWeb.csproj",
   "expectedPackageFiles": [
     "/home/savior21/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
     "/home/savior21/.nuget/packages/messagepack/2.1.152/messagepack.2.1.152.nupkg.sha512",

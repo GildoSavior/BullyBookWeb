@@ -12,6 +12,7 @@ namespace BullyBookWeb.Data.Repository
         public Repository(ApplicationDbContext db)
         {
             _db = db;
+            // _db.Products.Include(p => p.Category).Include(p => p.CoverType);
             this.dbSet = _db.Set<T>();
         }
 
@@ -20,17 +21,32 @@ namespace BullyBookWeb.Data.Repository
             dbSet.Add(entity);
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll(string? includeProtperties = null)
         {
             IQueryable<T> query = dbSet;
+            if (includeProtperties != null)
+            {
+                foreach (var includeProps in includeProtperties.Split(new char[] { ',' },
+                    StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProps);
+                }
+            }
             return query.ToList();
         }
 
-        public T GetFirstOrDefault(Expression<Func<T, bool>> filter)
+        public T GetFirstOrDefault(Expression<Func<T, bool>> filter, string? includeProtperties = null)
         {
             IQueryable<T> query = dbSet;
             query = query.Where(filter);
-
+            if (includeProtperties != null)
+            {
+                foreach (var includeProps in includeProtperties.Split(new char[] { ',' },
+                    StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProps);
+                }
+            }
             return query.FirstOrDefault();
         }
 

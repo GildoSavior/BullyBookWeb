@@ -9,6 +9,7 @@ namespace BullyBookWeb.Data.Repository.IRepository
     {
         ICategoryRepository Category { get; }
         ICoverTpeRepository Cover { get; }
+        IProductRepository Product { get; }
         void Save();
     }
 }
