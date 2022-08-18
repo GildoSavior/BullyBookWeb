@@ -12,7 +12,6 @@ namespace BullyBookWeb.Data.Repository
         public Repository(ApplicationDbContext db)
         {
             _db = db;
-            // _db.Products.Include(p => p.Category).Include(p => p.CoverType);
             this.dbSet = _db.Set<T>();
         }
 
@@ -39,6 +38,7 @@ namespace BullyBookWeb.Data.Repository
         {
             IQueryable<T> query = dbSet;
             query = query.Where(filter);
+
             if (includeProtperties != null)
             {
                 foreach (var includeProps in includeProtperties.Split(new char[] { ',' },
